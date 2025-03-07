@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div> 
+    <div class="clouds"></div>
+    <div class="title">
+        <h1>Happy Birthday My Universe</h1>
+    </div>
+    <audio id="background-music" loop>
+        <source src="music/music-website.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Play button -->
+    <button id="play-button" onclick="playMusic()">Play Music 🎵</button>
+
+    <script>
+        function playMusic() {
+            const audio = document.getElementById("background-music");
+            audio.play(); // Start playing the music when the button is clicked
+            audio.volume = 0.5; // Set volume to 50%
+            document.getElementById("play-button").style.display = "none"; // Hide the button after it's clicked
+        }
+    </script>
+    
+    
+
+    <!-- Floating message box -->
+    <div id="message-box" class="message-box"></div>
+
+    <script>
+        // Special messages for the stars
+        const messages = [
+            "Thats where you came from 23 years ago! ✨",
+            "I Love You the most Baby Girl ✨💖",
+            "Happy Birthday, my princess! 🎉👑",
+            "A star watches over you. ⭐",
+            "No gift could ever match the happiness you bring into my life. Wishing you the happiest birthday, my queen! 👑💖",
+            "I may not be the best with words, but on this day, I just want to say—you are my everything, and I’m so lucky to have you. 🥰",
+            "No words can describe how much I love you. You are my dream, my heart, and my soul. Happy Birthday, my angel. 💖",
+            "I had count the stars to tell you how much I love you… but they are infinite, just like my love for you! 🌠💕",
+            "On this special day, I just want to remind you that you are the most beautiful part of my life. 🎂❤️",
+            "You deserve all the happiness in the world today and always! Sending you warm hugs and kisses! 🤗💋",
+            "You are my brightest star, my reason to smile, and my forever love. Happy Birthday! 🌙💫"
+        ];
+
+        function createStar(x, y) {
+            let star = document.createElement("div");
+            star.className = "star";
+            star.style.top = `${y}px`;
+            star.style.left = `${x}px`;
+
+            // Show message when clicked
+            star.addEventListener("click", function (event) {
+                let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                showMessage(randomMessage, event.clientX, event.clientY);
+            });
+
+            document.body.appendChild(star);
+        }
+
+        function showMessage(message, x, y) {
+            let messageBox = document.getElementById("message-box");
+            messageBox.innerText = message;
+            messageBox.style.top = `${y}px`;
+            messageBox.style.left = `${x}px`;
+            messageBox.style.opacity = "1";
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageBox.style.opacity = "0";
+            }, 10000);
+        }
+
+        // Generate multiple stars at random positions
+        function generateStars(count) {
+            for (let i = 0; i < count; i++) {
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                createStar(x, y);
+            }
+        }
+
+        generateStars(15); // Creates 10 clickable stars
+    </script>
+</body>
+</html>
